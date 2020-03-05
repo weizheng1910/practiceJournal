@@ -4,7 +4,7 @@ class CreateJournals < ActiveRecord::Migration[6.0]
       t.string :date
       t.text :goals
       t.text :reflections
-      t.bytea :blob
+      t.string :blob
 
       t.timestamps
     end

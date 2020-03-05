@@ -1,3 +1,6 @@
+// Convert the mp3 into 'File' type
+// To play convert it into a URL and use '<audio type="audio/mp3" controls="controls" />'
+
 
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -11,7 +14,7 @@ class Journal extends React.Component {
       date: "",
       goals: "",
       reflections:"",
-      blob: ""
+      blob: {}
     }
   }
 
@@ -26,9 +29,21 @@ class Journal extends React.Component {
   }
 
   updateBlob(blob){
+    
     this.setState({blob:blob})
     console.log("Blob successfully uploaded!")
     console.log(this.state.blob)
+    console.log("Current State is")
+    console.log(this.state)
+  }
+
+  playSong(){
+    this.state.blob = URL.createObjectURL(this.state.blob)
+    console.log(this.state.blob)
+    //this.state.blob = this.state.blob.slice(5)
+    //console.log(this.state.blob)
+    this.setState({blob: this.state.blob})
+    //console.log(this.state.goals)
   }
 
 
@@ -39,6 +54,11 @@ class Journal extends React.Component {
       <div>
       <input type="date"></input>
       </div>
+
+
+     <button onClick={(evt)=>{this.playSong()}}>sdsdssds</button>
+      <audio src={this.state.blob} type="audio/mp3" controls="controls" />
+
       <br></br>
         <div>
           <p>What are your goals today?</p>
@@ -52,6 +72,11 @@ class Journal extends React.Component {
         <button className='btn btn-primary' onClick={(evt) => {this.props.liftEntry(this.state)}}>Add Entry</button>
       </div>
       <Recorder liftRecording={(blob)=>this.updateBlob(blob) }/>
+      <Recorder liftRecording={(blob)=>this.updateBlob(blob) }/>
+      <Recorder liftRecording={(blob)=>this.updateBlob(blob) }/>
+
+
+
       <div>End</div>
     </div>
   }

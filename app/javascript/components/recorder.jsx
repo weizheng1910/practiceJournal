@@ -38,8 +38,11 @@ class Recorder extends React.Component {
       .stop()
       .getMp3()
       .then(([buffer, blob]) => {
-        const blobURL = URL.createObjectURL(blob)
-        this.setState({ blobURL, isRecording: false });
+        const file = new File(buffer, 'me-at-thevoice.mp3', {
+          type: blob.type,
+          lastModified: Date.now()
+        })
+        this.setState({ blobURL: file, isRecording: false });
         this.props.liftRecording(this.state.blobURL)
       }).catch((e) => console.log(e));
   };
