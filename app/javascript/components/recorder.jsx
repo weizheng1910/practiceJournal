@@ -63,7 +63,7 @@ class Recorder extends React.Component {
     return (
       <div style={{border: "solid black 1px", width: 200 + 'px'}}>
           <TiMediaRecord onClick={this.start} disabled={this.state.isRecording} size={32}/>
-          <FaStop onClick={this.start} disabled={this.state.isRecording} size={20}/>
+          <FaStop onClick={this.stop} disabled={this.state.isRecording} size={20}/>
           <p>{recordingStatus}</p>
           <div>
           <audio src={this.state.blobURL} controls="controls" />
