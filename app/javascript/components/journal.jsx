@@ -10,7 +10,8 @@ class Journal extends React.Component {
     this.state = {
       date: "",
       goals: "",
-      reflections:""
+      reflections:"",
+      blob: ""
     }
   }
 
@@ -22,6 +23,12 @@ class Journal extends React.Component {
   updateReflections(currentInput){
     console.log(currentInput)
     this.setState({reflections: currentInput})
+  }
+
+  updateBlob(blob){
+    this.setState({blob:blob})
+    console.log("Blob successfully uploaded!")
+    console.log(this.state.blob)
   }
 
 
@@ -44,7 +51,7 @@ class Journal extends React.Component {
       <div>
         <button className='btn btn-primary' onClick={(evt) => {this.props.liftEntry(this.state)}}>Add Entry</button>
       </div>
-      <Recorder/>
+      <Recorder liftRecording={(blob)=>this.updateBlob(blob) }/>
       <div>End</div>
     </div>
   }

@@ -40,6 +40,7 @@ class Recorder extends React.Component {
       .then(([buffer, blob]) => {
         const blobURL = URL.createObjectURL(blob)
         this.setState({ blobURL, isRecording: false });
+        this.props.liftRecording(this.state.blobURL)
       }).catch((e) => console.log(e));
   };
 
