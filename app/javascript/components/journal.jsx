@@ -2,6 +2,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+import Recorder from '../components/recorder'
 
 class Journal extends React.Component { 
   constructor(){
@@ -27,13 +28,23 @@ class Journal extends React.Component {
   render(){
    
     return <div>
-      <div>Start</div>
+      <div>Date</div>
       <div>
       <input type="date"></input>
       </div>
-      <textarea onChange={(evt) => {this.updateGoals(evt.target.value)}} value={this.state.goals}></textarea>
-      <textarea onChange={(evt) => {this.updateReflections(evt.target.value)}} value={this.state.reflections}></textarea>
-      <button onClick={(evt) => {this.props.liftEntry(this.state)}}>Add Entry</button>
+      <br></br>
+        <div>
+          <p>What are your goals today?</p>
+          <textarea rows="4" cols="50" onChange={(evt) => {this.updateGoals(evt.target.value)}} value={this.state.goals}></textarea>
+        </div>
+        <div>
+          <p>Pen your reflections here!</p>
+        <textarea rows="4" cols="50" onChange={(evt) => {this.updateReflections(evt.target.value)}} value={this.state.reflections}></textarea>
+        </div>
+      <div>
+        <button className='btn btn-primary' onClick={(evt) => {this.props.liftEntry(this.state)}}>Add Entry</button>
+      </div>
+      <Recorder/>
       <div>End</div>
     </div>
   }
