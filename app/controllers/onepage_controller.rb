@@ -6,6 +6,17 @@ class OnepageController < ApplicationController
 
   def post
 
+    if params["candidate"]["resume"] != nil
+      begin
+      result = Cloudinary::Uploader.upload(params["candidate"]["resume"], :allowed_formats => ["pdf"])
+      rescue => e
+        if e
+          redirect_to edit_candidate_path, flash: { error: "Error" }
+          return
+        end
+      end
+      @candidate.resume_url = result["url"]
+
     puts params['date']
     puts params['goals']
     puts params['reflections']
@@ -23,7 +34,7 @@ class OnepageController < ApplicationController
     
   end
 
-  
+
 
   
 end
