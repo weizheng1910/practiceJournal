@@ -20,6 +20,10 @@ class Journal extends React.Component {
     }
   }
 
+  updateDate(currentInput){
+    this.setState({date: currentInput})
+  }
+
   updateGoals(currentInput){
     console.log(currentInput)
     this.setState({goals: currentInput})
@@ -31,7 +35,7 @@ class Journal extends React.Component {
   }
 
   updateBlob(blob){
-    this.setState({blob:blob})
+    this.setState({blob:blob[0]})
     console.log("Blob successfully uploaded!")
     console.log(this.state.blob)
     console.log("Current State is")
@@ -39,20 +43,27 @@ class Journal extends React.Component {
   }
 
   postEntry(){
-  const url = '/posts.json';
-  axios.post('/user', {
-    firstName: 'Fred',
-    lastName: 'Flintstone'
-  })
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-}
-
-
+    const formData = new FormData()
+      formData.append('date',this.state.date)
+      formData.append('goals',this.state.goals)
+      formData.append('reflections',this.state.reflections)
+      formData.append('blob',this.state.blob)
+     
+    const url = '/entry'
+      
+    axios({
+      method: 'post',
+      url: url,
+      data: formData,
+      
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 
 
   render(){
@@ -60,11 +71,11 @@ class Journal extends React.Component {
     return <div>
       <div>Date</div>
       <div>
-      <input type="date"></input>
+      <input onChange={(evt) => this.updateDate(evt.target.value)} type="date"></input>
       </div>
 
 
-     
+     <button onClick={(evt) => this.postEntry()}>THIS WILL POST</button>
 
       <br></br>
         <div>

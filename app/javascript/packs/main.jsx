@@ -22,7 +22,6 @@ class App extends React.Component {
     console.log(this.state.entries)
   }
 
-
   render(){
     return <div>
       <Journal liftEntry={(entry) => this.addEntry(entry)}/>
