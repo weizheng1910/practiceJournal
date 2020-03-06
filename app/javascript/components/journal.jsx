@@ -7,6 +7,8 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import Recorder from '../components/recorder'
 
+import axios from 'axios';
+
 class Journal extends React.Component { 
   constructor(){
     super()
@@ -14,7 +16,7 @@ class Journal extends React.Component {
       date: "",
       goals: "",
       reflections:"",
-      blob: {}
+      blob: []
     }
   }
 
@@ -29,7 +31,6 @@ class Journal extends React.Component {
   }
 
   updateBlob(blob){
-    
     this.setState({blob:blob})
     console.log("Blob successfully uploaded!")
     console.log(this.state.blob)
@@ -37,14 +38,18 @@ class Journal extends React.Component {
     console.log(this.state)
   }
 
-  playSong(){
-    this.state.blob = URL.createObjectURL(this.state.blob)
-    console.log(this.state.blob)
-    //this.state.blob = this.state.blob.slice(5)
-    //console.log(this.state.blob)
-    this.setState({blob: this.state.blob})
-    //console.log(this.state.goals)
-  }
+  getPosts(){
+  const url = '/posts.json';
+  axios.get(url)
+    .then((response) => {
+      const data = response.data
+      this.setState({ posts: data })
+    }).catch((error)=>{
+      console.log(error);
+    })
+}
+
+
 
 
   render(){
@@ -56,8 +61,7 @@ class Journal extends React.Component {
       </div>
 
 
-     <button onClick={(evt)=>{this.playSong()}}>sdsdssds</button>
-      <audio src={this.state.blob} type="audio/mp3" controls="controls" />
+     
 
       <br></br>
         <div>
@@ -72,8 +76,7 @@ class Journal extends React.Component {
         <button className='btn btn-primary' onClick={(evt) => {this.props.liftEntry(this.state)}}>Add Entry</button>
       </div>
       <Recorder liftRecording={(blob)=>this.updateBlob(blob) }/>
-      <Recorder liftRecording={(blob)=>this.updateBlob(blob) }/>
-      <Recorder liftRecording={(blob)=>this.updateBlob(blob) }/>
+     
 
 
 

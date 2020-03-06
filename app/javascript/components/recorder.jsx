@@ -16,9 +16,14 @@ class Recorder extends React.Component {
     super(props);
     this.state = {
       isRecording: false,
-      blobURL: '',
+      blobFiles: [],
       isBlocked: false,
+      name: ''
     };
+  }
+
+  updateInput(currentInput){
+    this.setState({name: currentInput})
   }
 
   start = () => {
@@ -38,12 +43,14 @@ class Recorder extends React.Component {
       .stop()
       .getMp3()
       .then(([buffer, blob]) => {
-        const file = new File(buffer, 'me-at-thevoice.mp3', {
+        const file = new File(buffer, this.state.name + '.mp3', {
           type: blob.type,
           lastModified: Date.now()
         })
-        this.setState({ blobURL: file, isRecording: false });
-        this.props.liftRecording(this.state.blobURL)
+        //Push file into array blobFiles
+        this.state.blobFiles.push(file)
+        this.setState({ blobFiles: this.state.blobFiles, isRecording: false, name: '' });
+        this.props.liftRecording(this.state.blobFiles)
       }).catch((e) => console.log(e));
   };
 
@@ -60,18 +67,41 @@ class Recorder extends React.Component {
     );
   }
 
+
   render(){
+
+    var recordings = this.state.blobFiles.map(file => {
+      return <div className='d-flex flex-row'>
+          <div className='p-3'>
+            <span>{file.name}</span>
+          </div>
+          <div>
+            <audio type="audio/mp3" src={URL.createObjectURL(file)} controls="controls" />
+          </div>
+        </div>
+    })
 
     var recordingStatus = (this.state.isRecording ? 'Recording Ongoing': 'Press Record to start recording')
     
     return (
-      <div style={{border: "solid black 1px", width: 200 + 'px'}}>
-          <TiMediaRecord onClick={this.start} disabled={this.state.isRecording} size={32}/>
-          <FaStop onClick={this.stop} disabled={this.state.isRecording} size={20}/>
-          <p>{recordingStatus}</p>
+      <div style={{border: "solid black 1px", width: 400 + 'px'}}>
+        <div style={{width: 80 + '%'}} className="d-flex flex-row bd-highlight mb-3">
           <div>
-          <audio src={this.state.blobURL} controls="controls" />
+            <input placeholder="Name of Recording" onChange={(evt) => this.updateInput(evt.target.value)} value={this.state.name}></input>
           </div>
+          <div>
+            <TiMediaRecord onClick={this.start} disabled={this.state.isRecording} size={32}/>
+          </div>
+          <div>
+            <FaStop onClick={this.stop} disabled={this.state.isRecording} size={20}/>
+          </div>
+        </div>
+        <div style={{width: 80 + '%'}}>
+            <p>{recordingStatus}</p>
+            <div>
+              {recordings}
+            </div>
+        </div>
       </div>
     );
   }
