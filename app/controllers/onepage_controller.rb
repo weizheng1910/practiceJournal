@@ -1,3 +1,5 @@
+
+
 class OnepageController < ApplicationController
   skip_before_action :verify_authenticity_token
   
@@ -6,47 +8,39 @@ class OnepageController < ApplicationController
 
   def post
 
-    # begin
-     #     result = Cloudinary::Uploader.upload(obj[1], :allowed_formats => ["mp3"])
-     #     rescue => e
-     #   if e
-     #     puts "error"
-      #    return
-      #  end
-        # @candidate.resume_url = result["url"]
-        # @candidate.update(candidate_params)
-
     puts params['date']
     puts params['goals']
     puts params['reflections']
 
     journal = Journal.create(date:params['date'], goals: params['goals'], reflections: params['reflections'])
 
-
-
     #obj[1] is the file object 
     puts "START LOOP"
     params.each do |obj|
       if obj[0][0..5] == 'record'
         #obj1 is the actual file object  
-        puts obj[1]
-        begin
-          result = Cloudinary::Uploader.upload(obj[1], :allowed_formats => ["mp3"])
+        file_name = obj[1].original_filename
+        puts file_name
+        puts obj[1].tempfile
+         begin
+         result = Cloudinary::Uploader.upload(obj[1].tempfile, :resource_type => :video)
+          puts "Yes conditional passed"
+          puts result['url']
+          puts journal
+          recording = Recording.create(name: file_name, file: result['url'], journal_id: journal.id)
           rescue => e
           if e
-            puts "error"
+            puts e
+            puts "Something wrong"
             return
           end
-
-
-
-
-
-      end
-    end
+          
+      end # end conditional check 
+      puts "END LOOP"
+    end # end loop
 
     
-    puts "END LOOP"
+  end #end post 
     
     
   end
