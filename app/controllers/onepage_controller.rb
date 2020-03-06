@@ -12,7 +12,7 @@ class OnepageController < ApplicationController
     puts params['goals']
     puts params['reflections']
 
-    journal = Journal.create(date:params['date'], goals: params['goals'], reflections: params['reflections'])
+    @journal = Journal.create(date:params['date'], goals: params['goals'], reflections: params['reflections'])
 
     #obj[1] is the file object 
     puts "START LOOP"
@@ -26,24 +26,28 @@ class OnepageController < ApplicationController
          result = Cloudinary::Uploader.upload(obj[1].tempfile, :resource_type => :video)
           puts "Yes conditional passed"
           puts result['url']
-          puts journal
-          recording = Recording.create(name: file_name, file: result['url'], journal_id: journal.id)
+          recording = Recording.create(name: file_name, file: result['url'], journal_id: @journal.id)
+          
           rescue => e
           if e
             puts e
             puts "Something wrong"
             return
-          end
-          
+          end     
       end # end conditional check 
-      puts "END LOOP"
+
     end # end loop
 
     
-  end #end post 
+
     
+  end #end loop
+    
+    x = Jour
     
   end
+    
+  
 
 
 
