@@ -35,7 +35,7 @@ class Journal extends React.Component {
   }
 
   updateBlob(blob){
-    this.setState({blob:blob[0]})
+    this.setState({blob:blob})
     console.log("Blob successfully uploaded!")
     console.log(this.state.blob)
     console.log("Current State is")
@@ -47,7 +47,10 @@ class Journal extends React.Component {
       formData.append('date',this.state.date)
       formData.append('goals',this.state.goals)
       formData.append('reflections',this.state.reflections)
-      formData.append('blob',this.state.blob)
+      for(let i = 0; i< this.state.blob.length; i++){
+        formData.append('record' + i, this.state.blob[i])
+      }
+      
      
     const url = '/entry'
       
@@ -55,7 +58,7 @@ class Journal extends React.Component {
       method: 'post',
       url: url,
       data: formData,
-      
+
     })
     .then(function (response) {
       console.log(response);
