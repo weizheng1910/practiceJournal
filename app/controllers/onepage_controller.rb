@@ -36,14 +36,17 @@ class OnepageController < ApplicationController
           end     
       end # end conditional check 
 
-    end # end loop
+    end # 
 
     
 
     
   end #end loop
     
-    x = Jour
+    this_journal = Journal.joins(:recordings).last
+    serialized_journal = JournalSerializer.new(this_journal).as_json  
+    
+    render plain: serialized_journal.to_json
     
   end
     
