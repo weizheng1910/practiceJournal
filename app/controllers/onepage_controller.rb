@@ -6,29 +6,46 @@ class OnepageController < ApplicationController
 
   def post
 
-    if params["candidate"]["resume"] != nil
-      begin
-      result = Cloudinary::Uploader.upload(params["candidate"]["resume"], :allowed_formats => ["pdf"])
-      rescue => e
-        if e
-          redirect_to edit_candidate_path, flash: { error: "Error" }
-          return
-        end
-      end
-      @candidate.resume_url = result["url"]
+    # begin
+     #     result = Cloudinary::Uploader.upload(obj[1], :allowed_formats => ["mp3"])
+     #     rescue => e
+     #   if e
+     #     puts "error"
+      #    return
+      #  end
+        # @candidate.resume_url = result["url"]
+        # @candidate.update(candidate_params)
 
     puts params['date']
     puts params['goals']
     puts params['reflections']
 
+    journal = Journal.create(date:params['date'], goals: params['goals'], reflections: params['reflections'])
+
+
+
     #obj[1] is the file object 
     puts "START LOOP"
     params.each do |obj|
-      if obj[0][0..5] == 'record' 
+      if obj[0][0..5] == 'record'
+        #obj1 is the actual file object  
         puts obj[1]
-      end
+        begin
+          result = Cloudinary::Uploader.upload(obj[1], :allowed_formats => ["mp3"])
+          rescue => e
+          if e
+            puts "error"
+            return
+          end
 
+
+
+
+
+      end
     end
+
+    
     puts "END LOOP"
     
     
