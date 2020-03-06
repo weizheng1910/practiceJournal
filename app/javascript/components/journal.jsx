@@ -38,15 +38,18 @@ class Journal extends React.Component {
     console.log(this.state)
   }
 
-  getPosts(){
+  postEntry(){
   const url = '/posts.json';
-  axios.get(url)
-    .then((response) => {
-      const data = response.data
-      this.setState({ posts: data })
-    }).catch((error)=>{
-      console.log(error);
-    })
+  axios.post('/user', {
+    firstName: 'Fred',
+    lastName: 'Flintstone'
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 }
 
 
