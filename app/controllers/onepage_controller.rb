@@ -17,38 +17,27 @@ class OnepageController < ApplicationController
       # @old_recordings = Recording.where(journal_id: @journal_id)
       # @old_recordings.destroy
 
+      # params is an object like the request.body
       params.each do |param|
         # Checking if the first 6 characters is 'record'
-        puts "What is in param???"
+        puts "Param field:"
         puts param
         if param[0][0..5] == 'record'
-          # Each parameter is an array; the param[0] is the key and param[1] is the value   
-          # The value of the parameter, param[1] is a Javascript File object, where
-          # .original_filename accesses the file name, and
-          # .tempfile points to the actual file.
-          
+          # If there is already an existing entry, 
+          # params['record' + i] will be a #<ActionDispatch::Http::UploadedFile:> if it is a new recording
+          # Or a stringified.JSON object pulled from Postgres if it is an existing recording
 
+          # If it is a stringifies JSON object, jump to the next iteration
           if param[1].is_a? String
             next
           end
 
-          puts "Not a JSON OBJECT"
-          #recording = JSON.parse(param[1])
-          #puts "Convert param[1] to object"
-          #puts recording
-
-          #puts string_to_object['name']
-          #puts string_to_object['file']
-
+          # Else upload new entry to cloudinary
           file_name = param[1].original_filename
           file = param[1].tempfile
           puts file_name
           puts file
-          
 
-          
-          
-          
           begin
             # Upload file to Cloudinary, 
             # After which, the same file could be accessed using 
@@ -66,7 +55,9 @@ class OnepageController < ApplicationController
         end # end if param[0][0..5] 
       end #end loop
 
-
+      this_journal = Journal.joins(:recordings).find(@journal.id)
+      serialized_journal = JournalSerializer.new(this_journal).as_json  
+      render plain: serialized_journal.to_json
 
 
     # Start else-condition if existing entry doesn't exist.
@@ -82,8 +73,8 @@ class OnepageController < ApplicationController
       params.each do |param|
         # Checking if the first 6 characters is 'record'
         if param[0][0..5] == 'record'
-          # Each parameter is an array; the param[0] is the key and param[1] is the value   
-          # The value of the parameter, param[1] is a Javascript File object, where
+          # param[0] is the key and param[1] is the value   
+          # param[1] is a Javascript File object, where
           # .original_filename accesses the file name, and
           # .tempfile points to the actual file.
           file_name = param[1].original_filename
@@ -114,17 +105,28 @@ class OnepageController < ApplicationController
   end
     
   def show
-    puts "Show action success"
     puts params['date'] 
     
     if journal = Journal.find_by(date: params['date'])
-      puts "In here"
       serialized_journal = JournalSerializer.new(journal).as_json
       render plain: serialized_journal.to_json
     end
+  end #end show
 
+  def delete
+    puts params[:index]
+    @recording = Recording.find(params[:index])
+    @journal = @recording.journal
+    @recording.destroy
 
-  end #end show 
+    puts "success?"
+    puts @journal.date
+
+    this_journal = Journal.joins(:recordings).find(@journal.id)
+    serialized_journal = JournalSerializer.new(this_journal).as_json  
+    render plain: serialized_journal.to_json
+
+  end 
 
 
 

@@ -59,11 +59,34 @@ class Journal extends React.Component {
         reflections: data.reflections,
         recordings: data.recordings
       })
-
     })
     .catch(function (error) {
       console.log(error);
     })
+
+  }
+
+  deleteRecording(index){
+    let currentComponent = this
+    const url = '/delete?index=' + index
+    axios({
+      method: 'post',
+      url: url,
+    })
+    .then(function (response) {
+      
+      const data = response.data
+      currentComponent.setState({
+        date: data.date,
+        goals: data.goals,
+        reflections: data.reflections,
+        recordings: data.recordings
+      })
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+
 
   }
 
@@ -123,6 +146,7 @@ class Journal extends React.Component {
       return<div>
         <div>{file.name}</div>
         <div><audio type="audio/mp3" controls="controls" src={file.file}/></div>
+        <div><button onClick={(evt)=>this.deleteRecording(file.id)}>{file.id}</button></div>
       </div>
     })
 
@@ -139,7 +163,7 @@ class Journal extends React.Component {
       {recordings}
      </div>
 
-     <button onClick={(evt) => {this.postEntry()}}></button>
+     <button onClick={(evt) => {this.postEntry()}}>Post Entry</button>
 
       <br></br>
         <div>
