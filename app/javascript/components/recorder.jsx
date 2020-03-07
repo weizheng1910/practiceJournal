@@ -16,7 +16,7 @@ class Recorder extends React.Component {
     super(props);
     this.state = {
       isRecording: false,
-      blobFiles: [],
+      blobFile: null,
       isBlocked: false,
       name: ''
     };
@@ -48,10 +48,11 @@ class Recorder extends React.Component {
           lastModified: Date.now()
         })
         //Push and update state object with recording files
-        this.state.blobFiles.push(file)
-        this.setState({ blobFiles: this.state.blobFiles, isRecording: false, name: '' });
+        this.state.blobFile = file
+        this.props.liftRecording(this.state.blobFile)
+
+        this.setState({ blobFile: null, isRecording: false, name: '' });
         // Transfer recording files to journal.jsx
-        this.props.liftRecording(this.state.blobFiles)
       }).catch((e) => console.log(e));
   };
 

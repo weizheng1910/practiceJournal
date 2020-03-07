@@ -16,7 +16,7 @@ class Journal extends React.Component {
       date: "",
       goals: "",
       reflections:"",
-      blob: []
+      recordings: []
     }
   }
 
@@ -34,12 +34,11 @@ class Journal extends React.Component {
     this.setState({reflections: currentInput})
   }
 
-  updateBlob(blob){
-    this.setState({blob:blob})
-    console.log("Blob successfully uploaded!")
-    console.log(this.state.blob)
-    console.log("Current State is")
-    console.log(this.state)
+  updateRecording(recording){
+    // push
+    this.state.recordings.push(recording)
+    this.setState({recordings: this.state.recordings})
+    
   }
 
   getDetails(date){
@@ -58,7 +57,7 @@ class Journal extends React.Component {
         date: data.date,
         goals: data.goals,
         reflections: data.reflections,
-        blob: data.recordings
+        recordings: data.recordings
       })
 
     })
@@ -73,9 +72,22 @@ class Journal extends React.Component {
       formData.append('date',this.state.date)
       formData.append('goals',this.state.goals)
       formData.append('reflections',this.state.reflections)
-      for(let i = 0; i< this.state.blob.length; i++){
-        formData.append('record' + i, this.state.blob[i])
+      for(let i = 0; i< this.state.recordings.length; i++){
+        let currentRecording = this.state.recordings[i]
+        if( currentRecording instanceof File){
+          formData.append('record' + i, currentRecording)
+          console.log('File instance is correctly appended')
+          console.log(currentRecording)
+        } else {
+          let existingRecording = JSON.stringify(currentRecording)
+          formData.append('record' + i, existingRecording)
+          console.log('Existing recording is correctly appended')
+          console.log(existingRecording)
+        }
       }
+
+      console.log("Posting!!!!")
+      console.log(formData)
       
      
     const url = '/entry'
@@ -94,7 +106,7 @@ class Journal extends React.Component {
         date: data.date,
         goals: data.goals,
         reflections: data.reflections,
-        blob: data.recordings
+        recordings: data.recordings
       })
 
       console.log(currentComponent.state)
@@ -107,7 +119,7 @@ class Journal extends React.Component {
 
   render(){
 
-    var recordings = this.state.blob.map(file => {
+    var recordings = this.state.recordings.map(file => {
       return<div>
         <div>{file.name}</div>
         <div><audio type="audio/mp3" controls="controls" src={file.file}/></div>
@@ -127,10 +139,12 @@ class Journal extends React.Component {
       {recordings}
      </div>
 
+     <button onClick={(evt) => {this.postEntry()}}></button>
+
       <br></br>
         <div>
           <p>What are your goals today?</p>
-          <textarea rows="4" cols="50" onChange={(evt) => {this.updateGoals(evt.target.value)}} value={this.state.goals}></textarea>
+          <textarea rows="4" cols="50" onChange={(evt) => {this.updateGoals(evt.target.value);console.log(this.state)}} value={this.state.goals}></textarea>
         </div>
         <div>
           <p>Pen your reflections here!</p>
@@ -143,7 +157,7 @@ class Journal extends React.Component {
 
 
 
-      <Recorder liftRecording={(blob)=>this.updateBlob(blob) }/>
+      <Recorder liftRecording={(recording)=>this.updateRecording(recording) }/>
      
 
 
