@@ -42,6 +42,32 @@ class Journal extends React.Component {
     console.log(this.state)
   }
 
+  getDetails(date){
+    let currentComponent = this
+    const url = '/entry?date=' + date
+
+    axios({
+      method: 'get',
+      url: url,
+    })
+    .then(function (response) {
+      console.log("Get Details Response promise")
+      console.log(response.data)
+      const data = response.data
+      currentComponent.setState({
+        date: data.date,
+        goals: data.goals,
+        reflections: data.reflections,
+        blob: data.recordings
+      })
+
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+
+  }
+
   postEntry(){
     const formData = new FormData()
       formData.append('date',this.state.date)
@@ -53,7 +79,8 @@ class Journal extends React.Component {
       
      
     const url = '/entry'
-      
+    let currentComponent = this
+
     axios({
       method: 'post',
       url: url,
@@ -61,7 +88,16 @@ class Journal extends React.Component {
 
     })
     .then(function (response) {
-      console.log(response);
+      const data = response.data
+
+      currentComponent.setState({
+        date: data.date,
+        goals: data.goals,
+        reflections: data.reflections,
+        blob: data.recordings
+      })
+
+      console.log(currentComponent.state)
     })
     .catch(function (error) {
       console.log(error);
@@ -70,15 +106,26 @@ class Journal extends React.Component {
 
 
   render(){
+
+    var recordings = this.state.blob.map(file => {
+      return<div>
+        <div>{file.name}</div>
+        <div><audio type="audio/mp3" controls="controls" src={file.file}/></div>
+      </div>
+    })
+
+
    
     return <div>
       <div>Date</div>
       <div>
-      <input onChange={(evt) => this.updateDate(evt.target.value)} type="date"></input>
+      <input onChange={(evt) => {this.getDetails(evt.target.value);this.updateDate(evt.target.value)}} type="date"></input>
       </div>
 
-
-     <button onClick={(evt) => this.postEntry()}>THIS WILL POST</button>
+     <div>
+      <p>henlo recordings here!</p>
+      {recordings}
+     </div>
 
       <br></br>
         <div>
@@ -92,6 +139,10 @@ class Journal extends React.Component {
       <div>
         <button className='btn btn-primary' onClick={(evt) => {this.props.liftEntry(this.state)}}>Add Entry</button>
       </div>
+
+
+
+
       <Recorder liftRecording={(blob)=>this.updateBlob(blob) }/>
      
 

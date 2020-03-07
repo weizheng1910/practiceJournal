@@ -47,9 +47,10 @@ class Recorder extends React.Component {
           type: blob.type,
           lastModified: Date.now()
         })
-        //Push file into array blobFiles
+        //Push and update state object with recording files
         this.state.blobFiles.push(file)
         this.setState({ blobFiles: this.state.blobFiles, isRecording: false, name: '' });
+        // Transfer recording files to journal.jsx
         this.props.liftRecording(this.state.blobFiles)
       }).catch((e) => console.log(e));
   };
@@ -70,6 +71,7 @@ class Recorder extends React.Component {
 
   render(){
 
+    /*
     var recordings = this.state.blobFiles.map(file => {
       return <div className='d-flex flex-row'>
           <div className='p-3'>
@@ -80,6 +82,7 @@ class Recorder extends React.Component {
           </div>
         </div>
     })
+    */
 
     var recordingStatus = (this.state.isRecording ? 'Recording Ongoing': 'Press Record to start recording')
     
@@ -98,9 +101,6 @@ class Recorder extends React.Component {
         </div>
         <div style={{width: 80 + '%'}}>
             <p>{recordingStatus}</p>
-            <div>
-              {recordings}
-            </div>
         </div>
       </div>
     );

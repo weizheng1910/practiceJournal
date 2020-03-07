@@ -8,6 +8,8 @@ class OnepageController < ApplicationController
 
   def post
 
+    
+
     puts params['date']
     puts params['goals']
     puts params['reflections']
@@ -37,20 +39,27 @@ class OnepageController < ApplicationController
       end # end conditional check 
 
     end # 
-
-    
-
     
   end #end loop
     
     this_journal = Journal.joins(:recordings).last
     serialized_journal = JournalSerializer.new(this_journal).as_json  
-    
     render plain: serialized_journal.to_json
     
   end
     
-  
+  def show
+    puts "Show action success"
+    puts params['date'] 
+    
+    if journal = Journal.find_by(date: params['date'])
+      puts "In here"
+      serialized_journal = JournalSerializer.new(journal).as_json
+      render plain: serialized_journal.to_json
+    end
+
+
+  end #end show 
 
 
 
