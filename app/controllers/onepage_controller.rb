@@ -110,6 +110,10 @@ class OnepageController < ApplicationController
     if journal = Journal.find_by(date: params['date'])
       serialized_journal = JournalSerializer.new(journal).as_json
       render plain: serialized_journal.to_json
+    else
+      journal = Journal.create(date: params['date'])
+      serialized_journal = JournalSerializer.new(journal).as_json
+      render plain: serialized_journal.to_json
     end
   end #end show
 
@@ -119,7 +123,6 @@ class OnepageController < ApplicationController
     @journal = @recording.journal
     @recording.destroy
 
-    puts "success?"
     puts @journal.date
 
     this_journal = Journal.joins(:recordings).find(@journal.id)

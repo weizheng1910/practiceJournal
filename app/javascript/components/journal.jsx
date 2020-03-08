@@ -53,12 +53,35 @@ class Journal extends React.Component {
       console.log("Get Details Response promise")
       console.log(response.data)
       const data = response.data
-      currentComponent.setState({
-        date: data.date,
-        goals: data.goals,
-        reflections: data.reflections,
-        recordings: data.recordings
-      })
+      // If any field is null, react will not re-render to show correct entry 
+      if(data.goals == null || data.reflections == null){
+        if(data.goals == null){
+          currentComponent.setState({
+            date: data.date,
+            goals: '',
+            reflections: data.reflections,
+            recordings: data.recordings
+          })
+        }
+
+        if (data.reflections == null){
+          currentComponent.setState({
+            date: data.date,
+            goals: data.goals,
+            reflections: '',
+            recordings: data.recordings
+          })
+        }
+      
+      } else {
+        currentComponent.setState({
+          date: data.date,
+          goals: data.goals,
+          reflections: data.reflections,
+          recordings: data.recordings
+        })
+      }
+      console.log(currentComponent.state)
     })
     .catch(function (error) {
       console.log(error);
@@ -168,7 +191,7 @@ class Journal extends React.Component {
       <br></br>
         <div>
           <p>What are your goals today?</p>
-          <textarea rows="4" cols="50" onChange={(evt) => {this.updateGoals(evt.target.value);console.log(this.state)}} value={this.state.goals}></textarea>
+          <textarea rows="4" cols="50" onChange={(evt) => {this.updateGoals(evt.target.value)}} value={this.state.goals}></textarea>
         </div>
         <div>
           <p>Pen your reflections here!</p>
