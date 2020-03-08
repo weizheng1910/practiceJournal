@@ -8,6 +8,8 @@ import PropTypes from 'prop-types'
 import { CloudinaryContext, Transformation, Image } from 'cloudinary-react';
 import axios from 'axios';
 
+import SimpleModal from '../components/modal'
+
 
 class Score extends React.Component { 
 
@@ -27,7 +29,7 @@ class Score extends React.Component {
     }).then( function(res){
       console.log(res.data.resources)
       currentComponent.setState({gallery: res.data.resources})
-      console.log("Now State has")
+      console.log(currentComponent.state.gallery)
     }).catch(function (error) {
       console.log(error);
     })
@@ -44,21 +46,16 @@ class Score extends React.Component {
   render(){
         return (
             <div className="main">
-                <h1>Galleria</h1>
+                <h3>Your Scores</h3>
                 <button onClick={this.uploadWidget.bind(this)} className="upload-button">upload</button>
                 <div className="gallery">
                     <CloudinaryContext cloudName="dia55ehom">
-                <Image publicId="pqajsu5ih75c8rxee1jd" alt="A sample photo" className="Samples"></Image>
                         {
                             this.state.gallery.map(data => {
                                 return (
                                     <div className="responsive" key={data.public_id}>
-                                        <div className="img">
-                                            <a target="_blank" href={`https://res.cloudinary.com/dia55ehom/image/upload/${data.public_id}.pdf`}>
-                                              {data.public_id}
-                                              <Image publicId="long_multi_page_pdf" >   </Image>
-                                            </a>
-                                            <div className="desc">Created at {data.created_at}</div>
+                                        <div>
+                                              <SimpleModal name={data.public_id} file={`https://res.cloudinary.com/dia55ehom/image/upload/${data.public_id}.pdf`}/>                                            
                                         </div>
                                     </div>
                                 )
