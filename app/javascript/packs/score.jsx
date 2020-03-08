@@ -54,8 +54,9 @@ class Score extends React.Component {
                                 return (
                                     <div className="responsive" key={data.public_id}>
                                         <div className="img">
-                                            <a target="_blank" href={`https://res.cloudinary.com/dia55ehom/image/upload/${data.public_id}.jpg`}>
+                                            <a target="_blank" href={`https://res.cloudinary.com/dia55ehom/image/upload/${data.public_id}.pdf`}>
                                               {data.public_id}
+                                              <Image publicId="long_multi_page_pdf" >   </Image>
                                             </a>
                                             <div className="desc">Created at {data.created_at}</div>
                                         </div>
