@@ -4,6 +4,10 @@ class OnepageController < ApplicationController
   skip_before_action :verify_authenticity_token
   
   def index
+    result = Cloudinary::Api.resources
+    puts result.rate_limit_remaining
+    puts result.rate_limit_allowed
+    puts result.rate_limit_reset_at
   end
 
   def post
@@ -131,7 +135,10 @@ class OnepageController < ApplicationController
 
   end 
 
+  def remove 
+    params['key']
+    result = Cloudinary::Uploader.destroy(params['key'])
+    puts result 
+  end #end remove
 
-
-  
 end

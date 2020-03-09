@@ -8,11 +8,8 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     width: 550,
     height: 500,
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
     padding: theme.spacing(0,0,0,0),
-    margin: theme.spacing(2,2,2,2)
+    margin: theme.spacing(0,0,0,70)
   },
 }));
 
@@ -32,7 +29,7 @@ export default function SimpleModal(props) {
 
   return (
     <div>
-      <button className="btn btn-primary" type="button" onClick={handleOpen}>
+      <button className="btn btn-outline-secondary" type="button" onClick={handleOpen}>
         Open {props.name}
       </button>
       <Modal

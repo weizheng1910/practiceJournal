@@ -173,8 +173,6 @@ class Journal extends React.Component {
       </div>
     })
 
-
-   
     return <div>
       <div>Date</div>
       <div>
@@ -182,11 +180,10 @@ class Journal extends React.Component {
       </div>
 
      <div>
-      <p>henlo recordings here!</p>
       {recordings}
      </div>
 
-     <button onClick={(evt) => {this.postEntry()}}>Post Entry</button>
+    
 
       <br></br>
         <div>
@@ -198,18 +195,12 @@ class Journal extends React.Component {
         <textarea rows="4" cols="50" onChange={(evt) => {this.updateReflections(evt.target.value)}} value={this.state.reflections}></textarea>
         </div>
       <div>
-        <button className='btn btn-primary' onClick={(evt) => {this.props.liftEntry(this.state)}}>Add Entry</button>
+       <button className="btn btn-outline-secondary" onClick={(evt) => {this.postEntry()}}>Post Entry</button>
       </div>
 
+      <Recorder liftRecording={(recording)=>{this.updateRecording(recording);this.postEntry()}}/>
 
-
-
-      <Recorder liftRecording={(recording)=>this.updateRecording(recording) }/>
-     
-
-
-
-      <div>End</div>
+      
     </div>
   }
 }

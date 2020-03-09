@@ -7,12 +7,17 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import Journal from '../components/journal'
 import Pdf from '../components/document'
+import Score from '../components/score'
+
+import './style.scss';
 
 class App extends React.Component { 
   constructor(){
     super()
     this.state = {
-      entries:[]
+      entries:[],
+      display: false,
+      file: ''
     }
   }
 
@@ -23,11 +28,26 @@ class App extends React.Component {
     console.log(this.state.entries)
   }
 
+  setFile(file){
+    this.setState({file: file, display: true})
+  }
+
+  clearFile(){
+    this.setState({file: '', display: false})
+  }
+
   render(){
-    return <div>
+    let monitor = (this.state.display ? <Pdf close={() => {this.clearFile()}} file={this.state.file}/> : <Score liftFile={(file) => {this.setFile(file)}}/>)
+    
+    return <div className="row vw-100">
+      <div className="col mx-3">
       <Journal liftEntry={(entry) => this.addEntry(entry)}/>
-      <Pdf/>
+      </div>
+      <div className="col mx-3">
+      {monitor}
+      </div>
     </div>
+    
   }
 }
 

@@ -1,0 +1,40 @@
+$font-stack:    "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+$primary-color: green;
+
+html, body{
+  min-width: 700px;
+  font-family: $font-stack;
+}
+
+#background {
+  background-image: url(./violin.jpg);
+  
+  background-size: 100%;
+  z-index: 0;
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5
+}
+
+#root {
+  z-index: 999
+}
+
+#score {
+  z-index: 999 
+}
+
+
+body{
+  padding:0px;
+}
+
+
+
+.banana:hover {
+  background-color: rgba(0,0,0,0.1);
+}

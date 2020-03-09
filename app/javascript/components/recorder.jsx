@@ -84,7 +84,7 @@ class Recorder extends React.Component {
         </div>
     })
     */
-
+    var recordingButton = (this.state.isRecording ? <FaStop onClick={this.stop} disabled={this.state.isRecording} size={20}/> : <TiMediaRecord onClick={this.start} disabled={this.state.isRecording} size={32}/> )
     var recordingStatus = (this.state.isRecording ? 'Recording Ongoing': 'Press Record to start recording')
     
     return (
@@ -94,10 +94,7 @@ class Recorder extends React.Component {
             <input placeholder="Name of Recording" onChange={(evt) => this.updateInput(evt.target.value)} value={this.state.name}></input>
           </div>
           <div>
-            <TiMediaRecord onClick={this.start} disabled={this.state.isRecording} size={32}/>
-          </div>
-          <div>
-            <FaStop onClick={this.stop} disabled={this.state.isRecording} size={20}/>
+            {recordingButton}
           </div>
         </div>
         <div style={{width: 80 + '%'}}>
