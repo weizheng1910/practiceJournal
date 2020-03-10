@@ -15,11 +15,6 @@ class OnepageController < ApplicationController
     # If entry with same data already exist?
     if @journal = Journal.find_by(date: params['date'])
       @journal.update(goals: params['goals'], reflections: params['reflections'])
-      # Update recordings by
-      # Destroying existing recordings associated with this entry
-      # Then updating it again with new ones
-      # @old_recordings = Recording.where(journal_id: @journal_id)
-      # @old_recordings.destroy
 
       # params is an object like the request.body
       params.each do |param|
@@ -58,6 +53,13 @@ class OnepageController < ApplicationController
           end # end begin
         end # end if param[0][0..5] 
       end #end loop
+
+      @if_recordings_available = Recording.where(journal_id: @journal.id)
+      if @if_recordings_available.length == 0 
+        @journal_without_recordings = Journal.find(@journal.id)
+        render :json => @journal_without_recordings 
+        return
+      end
 
       this_journal = Journal.joins(:recordings).find(@journal.id)
       serialized_journal = JournalSerializer.new(this_journal).as_json  
@@ -100,6 +102,13 @@ class OnepageController < ApplicationController
           end # end begin
         end # end if param[0][0..5] 
       end #end loop
+
+      @if_recordings_available = Recording.where(journal_id: @journal.id)
+      if @if_recordings_available.length == 0 
+        @journal_without_recordings = Journal.find(@journal.id)
+        render :json => @journal_without_recordings 
+        return
+      end
       
       this_journal = Journal.joins(:recordings).last
       serialized_journal = JournalSerializer.new(this_journal).as_json  

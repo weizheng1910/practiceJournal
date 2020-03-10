@@ -18,7 +18,8 @@ class Journal extends React.Component {
       date: "",
       goals: "",
       reflections:"",
-      recordings: []
+      recordings: [],
+      error: false
     }
   }
 
@@ -116,6 +117,13 @@ class Journal extends React.Component {
   }
 
   postEntry(){
+    if(this.state.date == ''){
+      this.setState({error: true})
+      return
+    } else {
+      this.setState({error: false})
+    }
+
     const formData = new FormData()
       formData.append('date',this.state.date)
       formData.append('goals',this.state.goals)
@@ -145,7 +153,6 @@ class Journal extends React.Component {
       method: 'post',
       url: url,
       data: formData,
-
     })
     .then(function (response) {
       const data = response.data
@@ -167,6 +174,8 @@ class Journal extends React.Component {
 
   render(){
 
+    var errMessage = (this.state.error ? 'Please choose a date' : '')
+
     var recordings = this.state.recordings.map(file => {
       return<div>
         <div>{file.name}</div>
@@ -181,6 +190,7 @@ class Journal extends React.Component {
       <div>Date</div>
       <div>
       <input onChange={(evt) => {this.getDetails(evt.target.value);this.updateDate(evt.target.value)}} type="date"></input>
+      <p className='text-danger'>{errMessage}</p>
       </div>
 
      <div>
@@ -201,7 +211,7 @@ class Journal extends React.Component {
       
 
         <div>
-         <button className="btn btn-outline-secondary" onClick={(evt) => {this.postEntry()}}>Post Entry</button>
+         <button className="btn btn-dark" onClick={(evt) => {this.postEntry()}}>Post Entry</button>
         </div>
 
         <br></br>

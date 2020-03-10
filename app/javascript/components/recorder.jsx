@@ -3,8 +3,6 @@ import React from 'react';
 import { TiMediaRecord } from 'react-icons/ti';
 import { FaStop } from 'react-icons/fa';
 
-
-
 import MicRecorder from 'mic-recorder-to-mp3';
 import Journal from '../components/recorder'
 
@@ -91,7 +89,7 @@ class Recorder extends React.Component {
       <div style={{width: 400 + 'px'}}>
         <div style={{width: 80 + '%'}} className="d-flex flex-row bd-highlight mb-3">
           <p>Recorder</p>
-          <div>
+          <div className='mx-2'>
             <input style={{backgroundColor: 'rgba(225,225,225,0.5)'}} placeholder="Name of Recording" onChange={(evt) => this.updateInput(evt.target.value)} value={this.state.name}></input>
           </div>
           <div>
