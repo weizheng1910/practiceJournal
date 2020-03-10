@@ -127,7 +127,23 @@ class OnepageController < ApplicationController
     @journal = @recording.journal
     @recording.destroy
 
+    puts "Date Date"
     puts @journal.date
+    @check = Recording.where(journal_id: @journal.id)
+    puts "These are the results     "
+    puts @check
+    puts "Check length is:"
+
+
+    puts @check.length
+    if @check.length == 0 
+      puts "Yay it reaches here"
+      @output = Journal.find(@journal.id)
+      puts @output
+      render :json => @output 
+      return
+
+    end
 
     this_journal = Journal.joins(:recordings).find(@journal.id)
     serialized_journal = JournalSerializer.new(this_journal).as_json  
