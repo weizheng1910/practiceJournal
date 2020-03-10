@@ -88,10 +88,11 @@ class Recorder extends React.Component {
     var recordingStatus = (this.state.isRecording ? 'Recording Ongoing': 'Press Record to start recording')
     
     return (
-      <div style={{border: "solid black 1px", width: 400 + 'px'}}>
+      <div style={{width: 400 + 'px'}}>
         <div style={{width: 80 + '%'}} className="d-flex flex-row bd-highlight mb-3">
+          <p>Recorder</p>
           <div>
-            <input placeholder="Name of Recording" onChange={(evt) => this.updateInput(evt.target.value)} value={this.state.name}></input>
+            <input style={{backgroundColor: 'rgba(225,225,225,0.5)'}} placeholder="Name of Recording" onChange={(evt) => this.updateInput(evt.target.value)} value={this.state.name}></input>
           </div>
           <div>
             {recordingButton}

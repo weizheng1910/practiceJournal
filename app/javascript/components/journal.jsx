@@ -7,6 +7,8 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import Recorder from '../components/recorder'
 
+import { FaStop } from 'react-icons/fa';
+import { MdDelete } from 'react-icons/md';
 import axios from 'axios';
 
 class Journal extends React.Component { 
@@ -168,8 +170,10 @@ class Journal extends React.Component {
     var recordings = this.state.recordings.map(file => {
       return<div>
         <div>{file.name}</div>
-        <div><audio type="audio/mp3" controls="controls" src={file.file}/></div>
-        <div><button onClick={(evt)=>this.deleteRecording(file.id)}>{file.id}</button></div>
+        <div className='d-flex flex-row'>
+          <div><audio type="audio/mp3" controls="controls" src={file.file}/></div>
+          <div style={{display:'flex',alignItems:'center',justifyContent:'center',width: 50 + 'px'}}><MdDelete size={40} onClick={(evt)=>this.deleteRecording(file.id)}/></div>
+        </div>
       </div>
     })
 
@@ -188,17 +192,22 @@ class Journal extends React.Component {
       <br></br>
         <div>
           <p>What are your goals today?</p>
-          <textarea rows="4" cols="50" onChange={(evt) => {this.updateGoals(evt.target.value)}} value={this.state.goals}></textarea>
+          <textarea style={{color: 'white', backgroundColor: 'rgba(225,225,225,0.1)'}} rows="4" cols="50" onChange={(evt) => {this.updateGoals(evt.target.value)}} value={this.state.goals}></textarea>
         </div>
         <div>
           <p>Pen your reflections here!</p>
-        <textarea rows="4" cols="50" onChange={(evt) => {this.updateReflections(evt.target.value)}} value={this.state.reflections}></textarea>
+        <textarea style={{color: 'white', backgroundColor: 'rgba(225,225,225,0.1)'}} rows="4" cols="50" onChange={(evt) => {this.updateReflections(evt.target.value)}} value={this.state.reflections}></textarea>
         </div>
-      <div>
-       <button className="btn btn-outline-secondary" onClick={(evt) => {this.postEntry()}}>Post Entry</button>
-      </div>
+      
 
-      <Recorder liftRecording={(recording)=>{this.updateRecording(recording);this.postEntry()}}/>
+        <div>
+         <button className="btn btn-outline-secondary" onClick={(evt) => {this.postEntry()}}>Post Entry</button>
+        </div>
+
+        <br></br>
+        <br></br>
+
+        <Recorder liftRecording={(recording)=>{this.updateRecording(recording);this.postEntry()}}/>
 
       
     </div>

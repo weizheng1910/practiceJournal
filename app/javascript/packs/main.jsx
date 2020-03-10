@@ -39,13 +39,18 @@ class App extends React.Component {
   render(){
     let monitor = (this.state.display ? <Pdf close={() => {this.clearFile()}} file={this.state.file}/> : <Score liftFile={(file) => {this.setFile(file)}}/>)
     
-    return <div className="row vw-100">
-      <div className="col mx-3">
+    return <div>
+      <div className='px-5' style={{backgroundColor: 'rgba(255,255,255,0.1)', height:50 + 'px'}} className="vw-100">
+        <h3>Practice Journal</h3>
+      </div>
+      <div className="row vw-100">
+      <div className="col mx-5">
       <Journal liftEntry={(entry) => this.addEntry(entry)}/>
       </div>
       <div className="col mx-3">
       {monitor}
       </div>
+    </div>
     </div>
     
   }
