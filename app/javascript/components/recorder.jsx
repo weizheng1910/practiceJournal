@@ -82,22 +82,20 @@ class Recorder extends React.Component {
         </div>
     })
     */
-    var recordingButton = (this.state.isRecording ? <FaStop onClick={this.stop} disabled={this.state.isRecording} size={20}/> : <TiMediaRecord onClick={this.start} disabled={this.state.isRecording} size={32}/> )
-    var recordingStatus = (this.state.isRecording ? 'Recording Ongoing': 'Press Record to start recording')
+    var recordingButton = (this.state.isRecording ? <FaStop className='record-element' onClick={this.stop} disabled={this.state.isRecording} size={20}/> : <TiMediaRecord className='record-element' onClick={this.start} disabled={this.state.isRecording} size={32}/> )
     
     return (
       <div style={{width: 400 + 'px'}}>
         <div style={{width: 80 + '%'}} className="d-flex flex-row bd-highlight mb-3">
           <p>Recorder</p>
           <div className='mx-2'>
-            <input style={{backgroundColor: 'rgba(225,225,225,0.5)'}} placeholder="Name of Recording" onChange={(evt) => this.updateInput(evt.target.value)} value={this.state.name}></input>
+            <input style={{backgroundColor: 'rgba(225,225,225,0.1)'}} placeholder="Name of Recording" onChange={(evt) => this.updateInput(evt.target.value)} value={this.state.name}></input>
           </div>
           <div>
             {recordingButton}
           </div>
         </div>
         <div style={{width: 80 + '%'}}>
-            <p>{recordingStatus}</p>
         </div>
       </div>
     );

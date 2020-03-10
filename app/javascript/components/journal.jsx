@@ -181,7 +181,7 @@ class Journal extends React.Component {
         <div>{file.name}</div>
         <div className='d-flex flex-row'>
           <div><audio type="audio/mp3" controls="controls" src={file.file}/></div>
-          <div style={{display:'flex',alignItems:'center',justifyContent:'center',width: 50 + 'px'}}><MdDelete size={40} onClick={(evt)=>this.deleteRecording(file.id)}/></div>
+          <div className='record-delete' style={{display:'flex',alignItems:'center',justifyContent:'center',width: 50 + 'px'}}><MdDelete size={40} onClick={(evt)=>this.deleteRecording(file.id)}/></div>
         </div>
       </div>
     })
@@ -189,7 +189,7 @@ class Journal extends React.Component {
     return <div>
       <div>Date</div>
       <div>
-      <input onChange={(evt) => {this.getDetails(evt.target.value);this.updateDate(evt.target.value)}} type="date"></input>
+      <input style={{color: 'white', backgroundColor: 'rgba(225,225,225,0.1)'}} onChange={(evt) => {this.getDetails(evt.target.value);this.updateDate(evt.target.value)}} type="date"></input>
       <p className='text-danger'>{errMessage}</p>
       </div>
 

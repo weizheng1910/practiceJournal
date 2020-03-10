@@ -7,7 +7,7 @@ html, body{
 }
 
 #background {
-  background-image: url(./violin.jpg);
+  background-image: linear-gradient(to left, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)), url(./violin.jpg);
   filter: brightness(65%);
   background-size: 100%;
   z-index: 0;
@@ -40,3 +40,13 @@ body{
 .banana:hover {
   background-color: rgba(0,0,0,0.1);
 }
+
+.record-element:hover, .record-delete:hover, .score-delete:hover {
+  color: pink
+}
+
+#upload-button:hover {
+  font-size: 25px;
+  color: pink
+}
+

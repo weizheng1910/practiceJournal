@@ -25,7 +25,7 @@ class Score extends React.Component {
       }
   }
 
-  componentDidMount() {
+  componentDidMount(){
     const url = `https://res.cloudinary.com/dia55ehom/image/list/scores.json`
     let currentComponent = this
     axios({
@@ -51,7 +51,35 @@ class Score extends React.Component {
             })
   }
 
-  
+  removeScore(publicid){
+    let currentComponent = this
+    const url = '/remove?publicid=' + publicid
+    axios({
+      method: 'post',
+      url: url,
+    })
+    .then(function (response) {
+      // Client-side removal
+      // Find the score in the state array
+      // And remove from it.
+      for (let i = 0; i < currentComponent.state.gallery.length; i++){
+        if(currentComponent.state.gallery[i].public_id == publicid.toString()){
+          console.log('match')
+          currentComponent.state.gallery.splice(i,1)
+          console.log('success delete!')
+          currentComponent.setState({gallery: currentComponent.state.gallery})
+          console.log('Check gallery')
+          console.log(currentComponent.state.gallery)
+
+        } else {
+          console.log('no match')
+        }
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+  }
 
   render(){
         return (
@@ -69,8 +97,8 @@ class Score extends React.Component {
                                           <div className='w-75 banana'>
                                             <p onClick={(evt)=>{this.props.liftFile(file)}}>{data.public_id}</p>                                            
                                           </div>
-                                          <div className='w-25'>
-                                            <MdDelete size={30}/>
+                                          <div className='score-delete w-25'>
+                                            <MdDelete onClick={(evt) => {this.removeScore(data.public_id)}} size={30}/>
                                           </div>
                                         </div>
                                     </div>
@@ -78,8 +106,8 @@ class Score extends React.Component {
                             })
                         }
                     </CloudinaryContext>
-                    <div className='w-25 px-6' style={{border: 'solid black 2px', borderRadius: 25 + 'px'}}>
-                      Upload <FiUpload onClick={this.uploadWidget.bind(this)} />
+                    <div id='upload-button' onClick={this.uploadWidget.bind(this)} className='w-25 px-6' >
+                      Upload <FiUpload />
                     </div>
                     <div className="clearfix"></div>
                 </div>

@@ -161,8 +161,8 @@ class OnepageController < ApplicationController
   end 
 
   def remove 
-    params['key']
-    result = Cloudinary::Uploader.destroy(params['key'])
+    params['publicid']
+    result = Cloudinary::Uploader.destroy(params['publicid'])
     puts result 
   end #end remove
 

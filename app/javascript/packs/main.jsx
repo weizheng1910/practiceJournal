@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 import Journal from '../components/journal'
 import Pdf from '../components/document'
 import Score from '../components/score'
+import { GiViolin } from 'react-icons/gi';
 
 import './style.scss';
 
@@ -40,8 +41,8 @@ class App extends React.Component {
     let monitor = (this.state.display ? <Pdf close={() => {this.clearFile()}} file={this.state.file}/> : <Score liftFile={(file) => {this.setFile(file)}}/>)
     
     return <div>
-      <div className='px-5' style={{backgroundColor: 'rgba(255,255,255,0.1)', height:50 + 'px'}} className="vw-100">
-        <h3>Practice Journal</h3>
+      <div className='px-5' style={{backgroundColor: 'rgba(255,255,255,0.1)', height:80 + 'px', display:'flex',alignItems:'center'}} className="vw-100">
+        <div className='mx-4'><div style={{fontSize: 35 + 'px'}} className='font-italic font-weight-bold mx-4'>Practice Journal <GiViolin /></div></div>
       </div>
       <div className="row vw-100">
       <div className="col mx-5">
