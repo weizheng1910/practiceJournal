@@ -217,9 +217,7 @@ class Journal extends React.Component {
         </div>
       
 
-        <div>
-         <div id='post-entry' onClick={(evt) => {this.postEntry()}}>Post Entry</div>
-        </div>
+        
 
         <br></br>
         <br></br>
