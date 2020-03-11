@@ -4,7 +4,6 @@ class CreateJournals < ActiveRecord::Migration[6.0]
       t.string :date
       t.text :goals
       t.text :reflections
-      t.references :blob
 
       t.timestamps
     end
