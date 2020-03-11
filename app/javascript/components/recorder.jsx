@@ -89,7 +89,7 @@ class Recorder extends React.Component {
         <div style={{width: 80 + '%'}} className="d-flex flex-row bd-highlight mb-3">
           <p>Recorder</p>
           <div className='mx-2'>
-            <input style={{backgroundColor: 'rgba(225,225,225,0.1)'}} placeholder="Name of Recording" onChange={(evt) => this.updateInput(evt.target.value)} value={this.state.name}></input>
+            <input className='input-box' style={{backgroundColor: 'rgba(225,225,225,0.1)', color: 'white'}} placeholder="Name of Recording" onChange={(evt) => this.updateInput(evt.target.value)} value={this.state.name}></input>
           </div>
           <div>
             {recordingButton}

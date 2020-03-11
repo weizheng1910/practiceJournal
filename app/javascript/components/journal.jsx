@@ -196,7 +196,7 @@ class Journal extends React.Component {
     return <div>
       <div>Date</div>
       <div>
-      <input style={{color: 'white', backgroundColor: 'rgba(225,225,225,0.1)'}} onChange={(evt) => {this.getDetails(evt.target.value);this.updateDate(evt.target.value)}} type="date"></input>
+      <input className='input-box' style={{color: 'white', backgroundColor: 'rgba(225,225,225,0.1)'}} onChange={(evt) => {this.getDetails(evt.target.value);this.updateDate(evt.target.value)}} type="date"></input>
       <p className='text-danger'>{errMessage}</p>
       </div>
 
@@ -209,11 +209,11 @@ class Journal extends React.Component {
       <br></br>
         <div>
           <p>What are your goals today?</p>
-          <textarea style={{color: 'white', backgroundColor: 'rgba(225,225,225,0.1)'}} rows="4" cols="50" onBlur={(evt)=>{this.postEntry()}} onChange={(evt) => {this.updateGoals(evt.target.value)}} value={this.state.goals}></textarea>
+          <textarea className='input-box' style={{color: 'white', backgroundColor: 'rgba(225,225,225,0.1)'}} rows="4" cols="50" onBlur={(evt)=>{this.postEntry()}} onChange={(evt) => {this.updateGoals(evt.target.value)}} value={this.state.goals}></textarea>
         </div>
         <div>
           <p>Pen your reflections here!</p>
-        <textarea style={{color: 'white', backgroundColor: 'rgba(225,225,225,0.1)'}} rows="4" cols="50" onBlur={(evt)=>{this.postEntry()}} onChange={(evt) => {this.updateReflections(evt.target.value)}} value={this.state.reflections}></textarea>
+        <textarea className='input-box' style={{color: 'white', backgroundColor: 'rgba(225,225,225,0.1)'}} rows="4" cols="50" onBlur={(evt)=>{this.postEntry()}} onChange={(evt) => {this.updateReflections(evt.target.value)}} value={this.state.reflections}></textarea>
         </div>
       
 
