@@ -66,7 +66,7 @@ export default class Pdf extends Component {
             file={this.props.file}
             onLoadSuccess={this.onDocumentLoadSuccess}
           >
-            <Page pageNumber={pageNumber} width={1000} />
+            <Page pageNumber={pageNumber} width={800} />
           </Document >
         </div>
 
