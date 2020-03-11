@@ -204,11 +204,9 @@ class Journal extends React.Component {
       {recordings}
      </div>
 
-    
-
       <br></br>
         <div>
-          <p>What are your goals today?</p>
+          <p className='text-danger'>What are your goals today?</p>
           <textarea className='input-box' style={{color: 'white', backgroundColor: 'rgba(225,225,225,0.1)'}} rows="4" cols="50" onBlur={(evt)=>{this.postEntry()}} onChange={(evt) => {this.updateGoals(evt.target.value)}} value={this.state.goals}></textarea>
         </div>
         <div>
