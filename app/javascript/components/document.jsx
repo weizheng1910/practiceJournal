@@ -57,7 +57,7 @@ export default class Pdf extends Component {
         </div>
         
 
-        <div style={{ width: 1000}}>
+        <div style={{ width: 800}}>
           <Document
             options={{
               cMapUrl: `//cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjs.version}/cmaps/`,
