@@ -24,7 +24,7 @@ class Journal extends React.Component {
   }
 
   updateDate(currentInput){
-    this.setState({date: currentInput})
+    this.setState({date: currentInput, error: false})
   }
 
   updateGoals(currentInput){
@@ -39,9 +39,16 @@ class Journal extends React.Component {
 
   updateRecording(recording){
     // push
+    if(this.state.date == ''){
+      this.setState({error:true})
+      return
+    } else {
+      this.setState({error:false})
+    }
+
     this.state.recordings.push(recording)
     this.setState({recordings: this.state.recordings})
-    
+    this.postEntry()
   }
 
   getDetails(date){
@@ -202,22 +209,22 @@ class Journal extends React.Component {
       <br></br>
         <div>
           <p>What are your goals today?</p>
-          <textarea style={{color: 'white', backgroundColor: 'rgba(225,225,225,0.1)'}} rows="4" cols="50" onChange={(evt) => {this.updateGoals(evt.target.value)}} value={this.state.goals}></textarea>
+          <textarea style={{color: 'white', backgroundColor: 'rgba(225,225,225,0.1)'}} rows="4" cols="50" onBlur={(evt)=>{this.postEntry()}} onChange={(evt) => {this.updateGoals(evt.target.value)}} value={this.state.goals}></textarea>
         </div>
         <div>
           <p>Pen your reflections here!</p>
-        <textarea style={{color: 'white', backgroundColor: 'rgba(225,225,225,0.1)'}} rows="4" cols="50" onChange={(evt) => {this.updateReflections(evt.target.value)}} value={this.state.reflections}></textarea>
+        <textarea style={{color: 'white', backgroundColor: 'rgba(225,225,225,0.1)'}} rows="4" cols="50" onBlur={(evt)=>{this.postEntry()}} onChange={(evt) => {this.updateReflections(evt.target.value)}} value={this.state.reflections}></textarea>
         </div>
       
 
         <div>
-         <button className="btn btn-dark" onClick={(evt) => {this.postEntry()}}>Post Entry</button>
+         <div id='post-entry' onClick={(evt) => {this.postEntry()}}>Post Entry</div>
         </div>
 
         <br></br>
         <br></br>
 
-        <Recorder liftRecording={(recording)=>{this.updateRecording(recording);this.postEntry()}}/>
+        <Recorder liftRecording={(recording)=>{this.updateRecording(recording)}}/>
 
       
     </div>

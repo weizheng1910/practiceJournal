@@ -45,8 +45,42 @@ body{
   color: pink
 }
 
+.record-element:active, .record-delete:active, .score-delete:active {
+  color: purple
+}
+
+.arrows, .close-score {
+  color: white
+}
+
+.arrows:hover, .close-score:hover {
+  color: pink
+}
+
+.close-score:active {
+  color: red
+}
+
+.arrows:active {
+  color: purple
+}
+
 #upload-button:hover {
   font-size: 25px;
   color: pink
 }
 
+#upload-button:active {
+  font-size: 25px;
+  color: purple
+}
+
+#post-entry:hover{
+  font-size: 25px;
+  color: pink 
+}
+
+#post-entry:active{
+  font-size: 25px;
+  color: purple
+}

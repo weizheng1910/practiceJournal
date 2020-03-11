@@ -40,18 +40,18 @@ export default class Pdf extends Component {
     return (
       <div style={{border: 0 + 'px'}}>
         <div className="d-flex justify-content-between" style={{border: 0 + 'px'}}>
-            <div style={{color: 'brown'}}>
+            <div className='arrows'>
               <FaArrowLeft onClick={this.goToPrevPage} size={40}/>
             </div>
             <div className='d-flex flex-row'>
-              <div className='mx-2' style={{color: 'brown'}}>
+              <div className='close-score mx-2' >
                 <FaWindowClose size={40} onClick={(evt) => {this.props.close()}}/>
               </div>
               <div style={{fontSize: 28 + 'px'}} className="font-weight-bold">
                 Page {pageNumber} of {numPages}
               </div>
             </div>
-            <div style={{color: 'brown'}}>
+            <div className='arrows'>
               <FaArrowRight onClick={this.goToNextPage} size={40}/>
             </div>
         </div>
