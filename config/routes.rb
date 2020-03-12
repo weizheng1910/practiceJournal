@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get '/react' => 'onepage#index'
+  get '/' => 'onepage#index'
   get '/entry' => 'onepage#show'
   post '/entry' => 'onepage#post'
   post '/delete' => 'onepage#delete'

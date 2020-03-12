@@ -21,6 +21,7 @@ class Score extends React.Component {
   }
 
   componentDidMount() {
+    console.log('In COMPONENT DID MOUNT')
     const url = `https://res.cloudinary.com/dia55ehom/image/list/scores.json`
     let currentComponent = this
     axios({

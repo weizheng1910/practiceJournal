@@ -26,6 +26,7 @@ class Score extends React.Component {
   }
 
   componentDidMount(){
+    console.log('COMPONENT DID MOUNT!!!')
     const url = `https://res.cloudinary.com/dia55ehom/image/list/scores.json`
     let currentComponent = this
     axios({
@@ -46,6 +47,7 @@ class Score extends React.Component {
     cloudinary.openUploadWidget({ cloud_name: 'dia55ehom', upload_preset: 'fym39chg', tags:['scores']},
         function(error, result) {
           if (result != null){
+            console.log('uploaded????????')
             _this.setState({gallery: _this.state.gallery.concat(result)})
           }
             })
