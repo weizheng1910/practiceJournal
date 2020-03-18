@@ -30,10 +30,16 @@ File :string(URL)
 
 ## General Process
 1. Coming up with the wireframe
-2. Looking for middlewares that allows me to record audio and display music sheet.
+2. Looking for middlewares that allow me to record audio and display music sheet.
 3. Planning how I should stack my React Componenets
 4. Linking the back-end
 5. Aesthetics
 
 ## Major hurdles and how I overcame them
+When I had the idea to create this app, my initial concern was to find a way to record audio files. Fortunately I came across this module [mic-recorder-to-mp3](https://www.npmjs.com/package/mic-recorder-to-mp3), a package which can enable the client's built-in microphone to record audio files.
+
+Then, I needed to find a way to store and retrieve the audio files. The audio files has to be stored in the database if they were to be stored permanently(and not get wiped away from a refresh). As this is a SPA, I need to find a way to pass audio files with a XMLHttpRequest. The audio file is a Javascript File Object of a Binary Large Object DataType. One way to pass such data is to use the FormData Object, which is an object consisting of key-value pairs, specifically used to transfer data over a XMLHttpRequest. Once the audio files could be passed over, the audio files can be easily stored using the Cloudinary API - it will store the actual file in the cloud and provide a link with which you can access it. The link will be stored in the database.
+
+As I am using the same POST request to create and update a journal entry, when the users is adding new recordings (with existing ones) , the data-type of the audio files will not be uniform in a POST request - existing recordings will be a URL link, whereas new recordings will be a Javascript File Object. To go about this issue, I came up with the solution of creating a conditional loop where it ignores the URL link and only insert new recordings into the journal entry.
+
 
