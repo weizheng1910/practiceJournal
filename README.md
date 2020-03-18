@@ -31,7 +31,7 @@ File :string(URL)
 ## General Process
 1. Coming up with the wireframe
 2. Looking for middlewares that allows me to record audio and display music sheet.
-3. Planning the structure of React Components.
+3. Planning how I should stack my React Componenets
 4. Linking the back-end
 5. Aesthetics
 
