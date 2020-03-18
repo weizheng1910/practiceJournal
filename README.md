@@ -1,5 +1,5 @@
 # Practice Journal
-
+[Link to App](http://practicejournal.herokuapp.com/)
 * Ruby version v 2.53
 
 * Key yarn dependencies </br>
