@@ -43,6 +43,8 @@ Then, I needed to find a way to store and retrieve the audio files. The audio fi
 
 As I am using the same POST request to create and update a journal entry, when the users is adding new recordings (with existing ones) , the data-type of the audio files will not be uniform in a POST request - existing recordings will be a URL link, whereas new recordings will be a Javascript File Object. To go around this, I came up with the solution of creating a conditional loop where it ignores the URL link and only insert new recordings into the journal entry.
 
-After the POST request is made, I want to be returned a JSON object of the current journal entry. As a journal entry consists of a 1TM relationship between the journal and the recording, I had to find a way to get a JSON object of a joint-query. I came across this [guide](https://buttercms.com/blog/json-serialization-in-rails-a-complete-guide) which allows me to do just this. 
+After the POST request is made, I want to be returned a JSON object of the current journal entry. As a journal entry consists of a 1TM relationship between the journal and the recording, I had to find a way to get a JSON object of a joint-query. I came across this [guide](https://buttercms.com/blog/json-serialization-in-rails-a-complete-guide) which allows me to do just this. I followed the documentation for active_model_serializers and was able to create a JSON object of the joint query. Using this JSON object, I am then able to conveniently update the state of my Journal Component. I am thus able to update recordings, goals, and reflections without rerendering the whole application. 
+
+Next key hurdle was to develop the functionality of uploading and displaying the music sheet. I was looking at the Cloudinary documentation where I came across a demo of the upload widget. Together with the react-pdf middleware I found, I synthesised the codes and successfully created the functionality.
 
 
