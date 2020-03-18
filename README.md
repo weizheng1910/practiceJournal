@@ -47,6 +47,7 @@ After the POST request is made, I want to be returned a JSON object of the curre
 
 Next key hurdle was to develop the functionality of uploading and displaying the music sheet. I was looking at the Cloudinary documentation where I came across a [demo](https://cloudinary.com/blog/how_to_build_an_image_library_with_react_cloudinary) of building an image library using Cloudinary-React. Together with the react-pdf middleware I found, I synthesised the codes and successfully created the functionality.
 
-## Features which I can improve on, 
+## Key Takeaways
+This project has given me the confidence to pick up and apply new technologies within a short timeframe.
 
 
