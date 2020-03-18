@@ -16,7 +16,7 @@
 Whenever I want to practice playing the violin, I find it troublesome that I have to find my practice journal, my music scores, and my audio recorder before I can start practicing. Thus, I thought of the idea to create a web-based application which have access to these 3 things at once.
 
 ## What my app does
-This is an app which helps musicians practise purposefully and systematically. Everyday, users will be able to journal their goals and reflection. In each daily entry, they can also submit audio recordings of their playing so they can keep track and identify ways they can improve on their playing.
+This is an app which helps musicians practise purposefully and systematically. Everyday, users will be able to journal their goals and reflection. In each daily entry, they can also submit audio recordings of their playing so they can keep track of their playing and identify ways they can improve on it.
 
 ## Database Schema
 Journal Entry</br>
