@@ -50,7 +50,7 @@ As I am using the same POST request to create and update a journal entry, when t
 #### Finding a way to retrieve journal entries and update state in React
 After the POST request is made, I want to be returned a JSON object of the current journal entry. As a journal entry consists of a 1TM relationship between the journal and the recording, I had to find a way to get a JSON object of a joint-query. I came across this [guide](https://buttercms.com/blog/json-serialization-in-rails-a-complete-guide) which allows me to do just this. I followed the documentation for active_model_serializers and was able to create a JSON object of the joint query. Using this JSON object, I am then able to conveniently update the state of my Journal Component. I am thus able to update recordings, goals, and reflections without rerendering the whole application. 
 
-#### Finding a way to upload files
+#### Finding a way to upload and view PDF 
 Next key hurdle was to develop the functionality of uploading and displaying the music sheet. I was looking at the Cloudinary documentation where I came across a [demo](https://cloudinary.com/blog/how_to_build_an_image_library_with_react_cloudinary) of building an image library using Cloudinary-React. Together with the react-pdf middleware I found, I tweaked the codes and successfully created the function.
 
 ## Key Takeaways
