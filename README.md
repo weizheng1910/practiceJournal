@@ -1,6 +1,6 @@
 # Practice Journal
 Single-Page Application built with React.js and Ruby-on-Rails 
-[Link to App](http://practicejournal.herokuapp.com/)
+[Link to App](https://practicejournal.herokuapp.com/)
 * Ruby version v 2.53
 
 * Key yarn dependencies </br>
