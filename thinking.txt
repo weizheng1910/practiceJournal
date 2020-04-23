@@ -1,6 +1,0 @@
-Display audio only after the post request is submitted.
-Recorder should purely record. 
-
-All recordings should be pushed to Journal to be displayed there.
-
-
