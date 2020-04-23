@@ -13,9 +13,6 @@ import { MdDelete } from 'react-icons/md';
 import { FiUpload } from 'react-icons/fi';
 
 
-import SimpleModal from '../components/modal'
-
-
 class Score extends React.Component { 
 
   constructor(props) {
