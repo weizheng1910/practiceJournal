@@ -15,8 +15,6 @@ Single-Page Application built with React.js and Ruby-on-Rails
   gem 'active_model_serializers', '~> 0.10.0'</br>
   gem 'cloudinary'</br>
 
-## What my app does
-This is an app which helps musicians practise purposefully and systematically. Everyday, users will be able to journal their goals and reflection. In each daily entry, they can also submit audio recordings of their playing so they can keep track of their playing and identify ways they can improve on it.
 
 ## Database Schema
 Journal Entry</br>
